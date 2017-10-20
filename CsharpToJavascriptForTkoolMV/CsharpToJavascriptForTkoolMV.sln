@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TkoolGameProj", "CsharpToJavascriptForTkoolMV\TkoolGameProj.csproj", "{F0041AB9-CA98-484E-938B-4BE3F24387E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVScriptTsApp", "MVScriptTsApp\MVScriptTsApp.csproj", "{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypescriptToJs", "TypescriptToJs\TypescriptToJs.csproj", "{8333C671-AA1E-451A-9A96-54BD154B4D72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		net_4_5_Debug|Any CPU = net_4_5_Debug|Any CPU
+		net_4_5_Release|Any CPU = net_4_5_Release|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0041AB9-CA98-484E-938B-4BE3F24387E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8333C671-AA1E-451A-9A96-54BD154B4D72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

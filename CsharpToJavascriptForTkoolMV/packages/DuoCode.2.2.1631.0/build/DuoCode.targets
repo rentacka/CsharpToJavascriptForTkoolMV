@@ -1,0 +1,237 @@
+<!--
+***********************************************************************************************
+DuoCode.targets
+
+The code below is proprietary code. It is NOT open-source and you are NOT allowed to modify or
+reuse any portion of the code without prior written consent by DuoCode.
+http://www.duoco.de
+
+Copyright (c) DuoCode. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <DuoCodeVersion Condition="'$(DuoCodeVersion)' == ''">2.2.1631.0</DuoCodeVersion>
+    <DuoCodeDir Condition="'$(DuoCodeDirOverride)' == ''">$(MSBuildThisFileDirectory)\..\tools</DuoCodeDir>
+    <DuoCodeDir Condition="'$(DuoCodeDirOverride)' != ''">$(DuoCodeDirOverride)</DuoCodeDir>
+    <AdditionalExplicitAssemblyReferences />
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <NoStdLib>true</NoStdLib>
+    <DuoCodeCompiler>$(DuoCodeDir)\dcc.exe</DuoCodeCompiler>
+    <CfgPropertyPagesGuidsAddCSharp Condition="'$(DuoCodeVsixVersion)' != ''">$(CfgPropertyPagesGuidsAddCSharp);{2b7d6d9a-f0cf-4804-967b-0cf5c1ad15d2}</CfgPropertyPagesGuidsAddCSharp>
+
+    <!-- Microsoft.Web.Publishing.OnlyFilesToRunTheApp.targets intervention -->
+    <OnAfterCollectFilesFromAllExtraReferenceFiles>OnAfterCollectFilesFromAllExtraReferenceFiles</OnAfterCollectFilesFromAllExtraReferenceFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- mscorlib.dll injection -->
+    <Reference Include="mscorlib" Condition="'$(AssemblyName)' != 'mscorlib'">
+      <HintPath>$(DuoCodeDir)\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <UsingTask Condition="'$(DuoCodeRunAsCommandLine)' == ''" TaskName="TaskDuoCode" AssemblyFile="$(DuoCodeCompiler)" />
+  <UsingTask Condition="'$(DuoCodeRunAsCommandLine)' == '' And '$(MSBuildToolsVersion)' >= 14" TaskName="TaskRoslynVersion" AssemblyFile="$(DuoCodeCompiler)" />
+  <UsingTask Condition="'$(DuoCodeRunAsCommandLine)' == ''" TaskName="TaskIncompatibleReferences" AssemblyFile="$(DuoCodeCompiler)" />
+
+  <PropertyGroup>
+    <ResolveCodeAnalysisRuleSetTarget Condition="$(CoreCompileDependsOn.Contains('ResolveCodeAnalysisRuleSet'))">ResolveCodeAnalysisRuleSet</ResolveCodeAnalysisRuleSetTarget>
+    <CompileTypeScriptTarget Condition="'$(TypeScriptTarget)' != ''">CompileTypeScript</CompileTypeScriptTarget>
+    <IsXBuild Condition="'$(MSBuildRuntimeVersion)' == ''">true</IsXBuild> <!-- XBuild/Mono detection -->
+    <!-- override 'CoreBuild' dependencies -->
+    <CoreBuildDependsOn Condition="'$(IsXBuild)' != 'true'">
+      BuildOnlySettings;
+      PreBuildEvent;
+      ResolveReferences;
+      PrepareResources;
+      $(ResolveCodeAnalysisRuleSetTarget);
+      CompileDuoCode;
+      GetTargetPath;
+      PrepareForRun;
+      _GetCompileOutputsForClean;
+      IncrementalClean;
+      $(CompileTypeScriptTarget);
+      PostBuildEvent;
+    </CoreBuildDependsOn>
+    <CoreBuildDependsOn Condition="'$(IsXBuild)' == 'true'">
+      PrepareForBuild;
+      GetFrameworkPaths;
+      GetReferenceAssemblyPaths;
+      PreBuildEvent;
+      ResolveReferences;
+      CopyFilesMarkedCopyLocal;
+      PrepareResources;
+      CompileDuoCode;
+      PrepareForRun;
+      _RecordCleanFile;
+      $(CompileTypeScriptTarget);
+      PostBuildEvent;
+    </CoreBuildDependsOn>
+    <AllowedReferenceRelatedFileExtensions>
+      $(AllowedReferenceRelatedFileExtensions);
+      .js;
+      .min.js;
+      .js.map;
+      .d.ts;
+      .xml
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <Target Name="AfterResolveReferences">
+    <!-- remove incompatible references -->
+    <TaskIncompatibleReferences Condition="'$(DuoCodeRunAsCommandLine)' == ''" References="@(ReferencePath)">
+      <Output TaskParameter="IncompatibleFiles" ItemName="IncompatibleFiles"/>
+    </TaskIncompatibleReferences>
+    <ItemGroup>
+      <ReferencePath Remove="@(IncompatibleFiles)"/>
+      <ReferenceCopyLocalPaths Include="$(DuoCodeDir)\mscorlib.js"     Condition="'$(AssemblyName)' != 'mscorlib'"/>
+      <ReferenceCopyLocalPaths Include="$(DuoCodeDir)\mscorlib.min.js" Condition="'$(AssemblyName)' != 'mscorlib'"/>
+      <ReferenceCopyLocalPaths Include="$(DuoCodeDir)\mscorlib.js.map" Condition="Exists('$(DuoCodeDir)\mscorlib.js.map')"/>
+      <ReferenceCopyLocalPaths Include="$(DuoCodeDir)\mscorlib.d.ts"   Condition="Exists('$(DuoCodeDir)\mscorlib.d.ts')"/>
+    </ItemGroup>
+    <!-- XBuild workaround for AllowedReferenceRelatedFileExtensions -->
+    <ItemGroup Condition="'$(IsXBuild)' == 'true'">
+      <ReferenceRelatedPaths   Include="@(ReferencePath->'%(rootdir)%(directory)%(filename).js')"/>
+      <ReferenceRelatedPaths   Include="@(ReferencePath->'%(rootdir)%(directory)%(filename).min.js')"/>
+      <ReferenceRelatedPaths   Include="@(ReferencePath->'%(rootdir)%(directory)%(filename).js.map')"/>
+      <ReferenceRelatedPaths   Include="@(ReferencePath->'%(rootdir)%(directory)%(filename).d.ts')"/>
+      <ReferenceRelatedPaths   Include="@(ReferencePath->'%(rootdir)%(directory)%(filename).xml')"/>
+      <ReferenceCopyLocalPaths Include="%(ReferenceRelatedPaths.Identity)" Condition="Exists('%(ReferenceRelatedPaths.FullPath)')"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="_GetCompileOutputsForClean">
+    <ItemGroup>
+      <FileWrites Include="$(TargetDir)$(AssemblyName).js"/>
+      <FileWrites Include="$(TargetDir)$(AssemblyName).min.js"/>
+      <FileWrites Include="$(TargetDir)$(AssemblyName).js.map"/>
+      <FileWrites Include="$(TargetDir)$(AssemblyName).d.ts"/>
+      <FileWrites Include="$(TargetDir)$(AssemblyName).xml"/>
+      <FileWrites Include="$(TargetDir)mscorlib.js"/>
+      <FileWrites Include="$(TargetDir)mscorlib.min.js"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CompileDuoCode">
+    <!-- check Roslyn version if running under MSBuild Tools 2015 -->
+    <TaskRoslynVersion Condition="'$(DuoCodeRunAsCommandLine)' == '' And '$(MSBuildToolsVersion)' >= 14">
+      <Output TaskParameter="Version" PropertyName="RoslynVersion" />
+    </TaskRoslynVersion>
+    <PropertyGroup Condition="'$(RoslynVersion)' != '' And $(RoslynVersion.StartsWith('1.3.')) And '$(RoslynVersion)' != '1.3.1.60616' And '$(RoslynVersion)' != '1.3.1.60621'">
+      <IsRoslynVersionMismatch>true</IsRoslynVersionMismatch>
+      <DuoCodeRunAsCommandLine>true</DuoCodeRunAsCommandLine>
+    </PropertyGroup>
+    <Warning Condition="'$(IsRoslynVersionMismatch)' == 'true'"
+             Text="Roslyn version $(RoslynVersion) mismatch. Running DuoCode compiler (dcc.exe) as an external process." />
+    <PropertyGroup>
+      <Comma>,</Comma>
+      <Quot>"</Quot>
+      <Quot Condition="'$(IsXBuild)' == 'true'"></Quot>
+      <DefineConstantsCs>$(DefineConstants.Replace(';', $(Comma)))</DefineConstantsCs>
+    </PropertyGroup>
+    <ItemGroup>
+      <AdditionalLibPathsIg Condition="'$(IsXBuild)' == 'true'" Include="$(AdditionalLibPaths)" />
+      <DccArgs                                                    Include="/nostdlib+"/>
+      <DccArgs                                Include="@(AdditionalFiles->'/additionalfile:$(Quot)%(FullPath)$(Quot)')"/>
+      <DccArgs Condition="'@(AddModules)'                  != ''" Include="/addmodule:@(AddModules)"/>
+      <DccArgs Condition="$(ResolveCodeAnalysisRuleSetTarget) != ''" Include="@(Analyzer->'/analyzer:$(Quot)%(FullPath)$(Quot)')"/>
+      <DccArgs Condition="'$(AppConfig)'                   != ''" Include="/appconfig:$(AppConfig)"/>
+      <DccArgs Condition="'$(CodePage)'                    != ''" Include="/codepage:$(CodePage)"/>
+      <DccArgs Condition="'$(DebugSymbols)'            == 'true'" Include="/debug+"/>
+      <DccArgs Condition="'$(DebugType)' != '' And '$(DebugType)' != 'none'" Include="/debug:$(DebugType)"/>
+      <DccArgs Condition="'$(DefineConstants)'             != ''" Include="/define:$(DefineConstantsCs)"/>
+      <DccArgs                                    Include="@(DocFileItem->'/doc:$(Quot)%(FullPath)$(Quot)')"/>
+      <DccArgs Condition="'$(ErrorEndLocation)'        == 'true'" Include="/errorendlocation"/>
+      <DccArgs Condition="'$(GenerateFullPaths)'       == 'true'" Include="/fullpaths"/>
+      <DccArgs Condition="$(ProjectTypeGuids.ToLower().Contains('349c5851-65df-11da-9384-00065b846f21'))" Include="/interopdll-"/>
+      <DccArgs Condition="'$(LangVersion)'                 != ''" Include="/langversion:$(LangVersion)"/>
+      <DccArgs Condition="'$(AdditionalLibPaths)' != '' And '$(IsXBuild)' != 'true'" Include="/lib:$(AdditionalLibPaths.Replace(';','%3B'))"/>
+      <DccArgs Condition="'$(AdditionalLibPaths)' != '' And '$(IsXBuild)' == 'true'" Include="@(AdditionalLibPathsIg->'/lib:%(Identity)')"/>
+      <DccArgs Condition="'$(OutputType)'                  != ''" Include="/target:$(OutputType)"/>
+      <DccArgs Condition="'$(StartupObject)'               != ''" Include="/main:$(StartupObject)"/>
+      <DccArgs Condition="'$(ModuleAssemblyName)'          != ''" Include="/moduleassemblyname:$(ModuleAssemblyName)"/>
+      <DccArgs Condition="'$(NoWarn)'                      != ''" Include="/nowarn:$(NoWarn)"/>
+      <DccArgs Condition="'$(Optimize)'                == 'true'" Include="/optimize+"/>
+      <DccArgs Condition="'$(PdbFile)'                     != ''" Include="/pdb:$(PdbFile)"/>
+      <DccArgs Condition="'$(PlatformTarget)'              != ''" Include="/platform:$(PlatformTarget)"/>
+      <DccArgs Condition="'$(ResolveCodeAnalysisRuleSetTarget)' != '' And '$(ResolvedCodeAnalysisRuleSet)' != ''" Include="/ruleset:$(Quot)$(ResolvedCodeAnalysisRuleSet)$(Quot)"/>
+      <DccArgs Condition="'$(TreatWarningsAsErrors)'   == 'true'" Include="/warnaserror+"/>
+      <DccArgs Condition="'$(WarningLevel)'                != ''" Include="/warn:$(WarningLevel)"/>
+      <DccArgs Condition="'$(WarningsAsErrors)'            != ''" Include="/warnaserror+:$(WarningsAsErrors)"/>
+      <DccArgs Condition="'$(WarningsNotAsErrors)'         != ''" Include="/warnaserror-:$(WarningsNotAsErrors)"/>
+      <DccArgs Condition="'$(Utf8Output)'              == 'true'" Include="/utf8output"/>
+      <DccArgs                                                    Include="/out:$(Quot)$(TargetDir)$(AssemblyName)$(TargetExt)$(Quot)"/>
+      <DccArgs                                                    Include="/intermediateout:$(Quot)$(IntermediateOutputPath)$(AssemblyName)$(TargetExt)$(Quot)"/>
+      <DccArgs                                  Include="@(ReferencePath->'/reference:$(Quot)%(FullPath)$(Quot)')"/>
+      <DccArgs                       Include="@(ReferenceDependencyPaths->'/reference:$(Quot)%(FullPath)$(Quot)')"/>
+
+      <DccArgs Condition="'$(DuoCodeVersion)' != ''"                                         Include="/dccversion:$(DuoCodeVersion)"/>
+      <DccArgs Condition="'$(DuoCodeDtsMode)' != ''"                                         Include="/dts:$(DuoCodeDtsMode)"/>
+      <DccArgs Condition="'$(DuoCodeDtsMode)' == '' And '$(TypeScriptTarget)' != ''"         Include="/dts:$(TypeScriptTarget)"/>
+      <DccArgs Condition="'$(DuoCodeInteropDll)' == 'true'"                                  Include="/interopdll+"/>
+      <DccArgs Condition="'$(DuoCodeInteropDll)' == 'false'"                                 Include="/interopdll-"/>
+      <DccArgs Condition="'$(DuoCodeInvokeMainMode)' != ''"                                  Include="/invokemainmode:$(DuoCodeInvokeMainMode)"/>
+      <DccArgs Condition="'$(DuoCodeJsDocLevel)' != ''"                                      Include="/jsdoc:$(DuoCodeJsDocLevel)"/>
+      <DccArgs Condition="'$(DuoCodeLicense)' != ''"                                         Include="/license:$(DuoCodeLicense)"/>
+      <DccArgs Condition="'$(DuoCodeModuleKind)' != '' And '$(DuoCodeModuleKind)' != 'none'" Include="/module:$(DuoCodeModuleKind)"/>
+      <DccArgs Condition="'$(DuoCodeNoComments)' == 'true'"                                  Include="/nocomments"/>
+      <DccArgs Condition="'$(DuoCodeNoSourceMaps)' == 'true'"                                Include="/nosourcemaps"/>
+      <DccArgs Condition="'$(DuoCodeInlineSourceMaps)' == 'true'"                            Include="/inlinesourcemaps"/>
+      <DccArgs Condition="'$(DuoCodeReflectionLevel)' != ''"                                 Include="/reflectionlevel:$(DuoCodeReflectionLevel)"/>
+      <DccArgs Condition="'$(DuoCodeSourceMapsRoot)' != ''"                                  Include="/maproot:$(Quot)$(DuoCodeSourceMapsRoot)$(Quot)"/>
+      <DccArgs Condition="'$(DuoCodeSourceCodeRoot)' != ''"                                  Include="/srcroot:$(Quot)$(DuoCodeSourceCodeRoot)$(Quot)"/>
+      <DccArgs Condition="'$(DuoCodeRunAsCommandLine)' == 'true' And '$(VisualStudioEdition)' != ''" Include="/vsedition:$(Quot)$(VisualStudioEdition)$(Quot)"/>
+      <DccArgs Condition="'$(DuoCodeArguments)' != ''"                                       Include="$(DuoCodeArguments)"/>
+
+      <DccArgs                                                  Include="@(Compile)"/>
+      <DccArgs Condition="'@(EmbeddedResource)'          != ''" Include="/resources:"/>
+      <DccArgs Condition="'@(EmbeddedResource)' != '' And '%(EmbeddedResource.LogicalName)' == ''" Include="@(EmbeddedResource->'$(Quot)%(Identity)$(Quot)')"/>
+      <DccArgs Condition="'@(EmbeddedResource)' != '' And '%(EmbeddedResource.LogicalName)' != ''" Include="@(EmbeddedResource->'$(Quot)%(Identity) -> %(LogicalName)$(Quot)')"/>
+    </ItemGroup>
+
+    <PropertyGroup Condition="'$(DuoCodeRunAsCommandLine)' == 'true'">
+      <DccArgsAsString>@(DccArgs, ' ')</DccArgsAsString>
+      <!-- if arguments are too long, switch to response file -->
+      <DuoCodeRunAsCommandLine Condition="$(DccArgsAsString.Length) > 8000">useRspFile</DuoCodeRunAsCommandLine>
+    </PropertyGroup>
+
+    <WriteLinesToFile Condition="'$(DuoCodeRunAsCommandLine)' == 'useRspFile'"
+                      File="$(TargetDir)_dcc.rsp"
+                      Lines="@(DccArgs)"
+                      Overwrite="true"
+                      Encoding="Unicode"/>
+
+    <TaskDuoCode Condition="'$(DuoCodeRunAsCommandLine)' == ''" Arguments="@(DccArgs)" />
+
+    <Exec        Condition="'$(DuoCodeRunAsCommandLine)' == 'true'"       Command="&quot;$(DuoCodeCompiler)&quot; @(DccArgs, ' ')" />
+    <Exec        Condition="'$(DuoCodeRunAsCommandLine)' == 'useRspFile'" Command="&quot;$(DuoCodeCompiler)&quot; &quot;@$(TargetDir)_dcc.rsp&quot;" />
+  </Target>
+
+  <!-- Microsoft.Web.Publishing.OnlyFilesToRunTheApp.targets intervention -->
+  <Target Name="OnAfterCollectFilesFromAllExtraReferenceFiles">
+    <ItemGroup>
+      <!-- exclude 'assembly.dll' -->
+      <FilesForPackagingFromProject Remove="$(OutDir)$(AssemblyName)$(TargetExt)"/>
+      <!-- include 'assembly.js' -->
+      <FilesForPackagingFromProject Include="$(OutDir)$(AssemblyName).js">
+        <DestinationRelativePath>bin\%(FileName)%(Extension)</DestinationRelativePath>
+        <FromTarget>CollectFilesFromIntermediateAssembly</FromTarget>
+        <Category>Run</Category>
+      </FilesForPackagingFromProject>
+      <!-- include 'assembly.js.map' -->
+      <FilesForPackagingFromProject Condition="'$(DuoCodeNoSourceMaps)' != 'true' And Exists('$(OutDir)$(AssemblyName).js.map')"
+                                    Include="$(OutDir)$(AssemblyName).js.map">
+        <DestinationRelativePath>bin\%(FileName)%(Extension)</DestinationRelativePath>
+        <FromTarget>CollectFilesFromIntermediateAssembly</FromTarget>
+        <Category>Debug</Category>
+      </FilesForPackagingFromProject>
+      <!-- fix 'DestinationRelativePath' move files from 'bin\' to '$(OutputPath)' -->
+      <FilesForPackagingFromProject Condition="$([System.String]::new('%(FilesForPackagingFromProject.DestinationRelativePath)').StartsWith('bin\'))">
+        <DestinationRelativePath>$(OutputPath)\%(FilesForPackagingFromProject.FileName)%(FilesForPackagingFromProject.Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+  </Target>
+</Project>

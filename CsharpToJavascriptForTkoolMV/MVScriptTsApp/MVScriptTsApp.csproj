@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90EC200D-0305-4CA0-974C-2ED6FCC7EDEA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MVScriptTsApp</RootNamespace>
+    <AssemblyName>MVScriptTsApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Mono.Cecil.0.9.6.1\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Mono.Cecil.0.9.6.1\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Mono.Cecil.0.9.6.1\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Mono.Cecil.0.9.6.1\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Netjs">
+      <HintPath>..\Netjs.exe</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NRefactory">
+      <HintPath>..\NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="DynamicJson.cs" />
+    <Compile Include="NetJsCompiler.cs" />
+    <Content Include="Redame.txt" />
+    <Compile Include="TkoolJson.cs" />
+    <Compile Include="TkoolJsonData\Action.cs" />
+    <Compile Include="TkoolJsonData\Actors.cs" />
+    <Compile Include="TkoolJsonData\Airship.cs" />
+    <Compile Include="TkoolJsonData\Animations.cs" />
+    <Compile Include="TkoolJsonData\Armors.cs" />
+    <Compile Include="TkoolJsonData\AttackMotion.cs" />
+    <Compile Include="TkoolJsonData\BattleBgm.cs" />
+    <Compile Include="TkoolJsonData\Bgm.cs" />
+    <Compile Include="TkoolJsonData\Bgm2.cs" />
+    <Compile Include="TkoolJsonData\Bgm3.cs" />
+    <Compile Include="TkoolJsonData\Bgs.cs" />
+    <Compile Include="TkoolJsonData\Boat.cs" />
+    <Compile Include="TkoolJsonData\Classes.cs" />
+    <Compile Include="TkoolJsonData\CommonEvents.cs" />
+    <Compile Include="TkoolJsonData\Conditions.cs" />
+    <Compile Include="TkoolJsonData\Damage.cs" />
+    <Compile Include="TkoolJsonData\DefeatMe.cs" />
+    <Compile Include="TkoolJsonData\DropItem.cs" />
+    <Compile Include="TkoolJsonData\Effect.cs" />
+    <Compile Include="TkoolJsonData\Enemies.cs" />
+    <Compile Include="TkoolJsonData\Event.cs" />
+    <Compile Include="TkoolJsonData\GameoverMe.cs" />
+    <Compile Include="TkoolJsonData\Image.cs" />
+    <Compile Include="TkoolJsonData\Items.cs" />
+    <Compile Include="TkoolJsonData\Learning.cs" />
+    <Compile Include="TkoolJsonData\List.cs" />
+    <Compile Include="TkoolJsonData\List2.cs" />
+    <Compile Include="TkoolJsonData\Map.cs" />
+    <Compile Include="TkoolJsonData\MapInfoItem.cs" />
+    <Compile Include="TkoolJsonData\Member.cs" />
+    <Compile Include="TkoolJsonData\Messages.cs" />
+    <Compile Include="TkoolJsonData\MoveRoute.cs" />
+    <Compile Include="TkoolJsonData\Page.cs" />
+    <Compile Include="TkoolJsonData\Page_Troops.cs" />
+    <Compile Include="TkoolJsonData\PluguinJs.cs" />
+    <Compile Include="TkoolJsonData\Se.cs" />
+    <Compile Include="TkoolJsonData\Ship.cs" />
+    <Compile Include="TkoolJsonData\Skills.cs" />
+    <Compile Include="TkoolJsonData\Sound.cs" />
+    <Compile Include="TkoolJsonData\States.cs" />
+    <Compile Include="TkoolJsonData\Terms.cs" />
+    <Compile Include="TkoolJsonData\TestBattler.cs" />
+    <Compile Include="TkoolJsonData\Tilesets.cs" />
+    <Compile Include="TkoolJsonData\Timing.cs" />
+    <Compile Include="TkoolJsonData\TitleBgm.cs" />
+    <Compile Include="TkoolJsonData\TkoolMapJson.cs" />
+    <Compile Include="TkoolJsonData\TkoolSystem.cs" />
+    <Compile Include="TkoolJsonData\Trait.cs" />
+    <Compile Include="TkoolJsonData\Trait_Int.cs" />
+    <Compile Include="TkoolJsonData\Troops.cs" />
+    <Compile Include="TkoolJsonData\VictoryMe.cs" />
+    <Compile Include="TkoolJsonData\Weapons.cs" />
+    <Compile Include="TkoolPluginJs.cs" />
+    <Compile Include="TsToJsAssist.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsharpToJavascriptForTkoolMV\TkoolGameProj.csproj">
+      <Project>{f0041ab9-ca98-484e-938b-4be3f24387e0}</Project>
+      <Name>TkoolGameProj</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
