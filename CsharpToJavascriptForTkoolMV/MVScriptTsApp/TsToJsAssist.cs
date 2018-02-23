@@ -9,7 +9,8 @@ namespace MVScriptTsApp
 {
     public static class TsToJsAssist
     {
-        public static Encoding ender = Encoding.GetEncoding("Shift_JIS");
+        public static Encoding ender = Encoding.UTF8;
+        //Encoding.GetEncoding("Shift_JIS");
 
         public static void ToImmediateMethod(string startTsPath)
         {
@@ -173,7 +174,7 @@ namespace MVScriptTsApp
             sr.Close();
 
             // 書き込み
-            StreamWriter sw = new StreamWriter(startTsPath);
+            StreamWriter sw = new StreamWriter(startTsPath, false, ender);
             foreach (var item in lines)
             {
                 sw.WriteLine(item);

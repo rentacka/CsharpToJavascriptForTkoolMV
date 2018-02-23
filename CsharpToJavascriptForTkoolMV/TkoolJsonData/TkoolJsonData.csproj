@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCE0BFE4-A405-4EB2-B2E9-22C0F5DD4739}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TkoolJsonData</RootNamespace>
+    <AssemblyName>TkoolJsonData</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TkoolJsonData\Action.cs" />
+    <Compile Include="TkoolJsonData\Actors.cs" />
+    <Compile Include="TkoolJsonData\Airship.cs" />
+    <Compile Include="TkoolJsonData\Animations.cs" />
+    <Compile Include="TkoolJsonData\Armors.cs" />
+    <Compile Include="TkoolJsonData\AttackMotion.cs" />
+    <Compile Include="TkoolJsonData\BattleBgm.cs" />
+    <Compile Include="TkoolJsonData\Bgm.cs" />
+    <Compile Include="TkoolJsonData\Bgm2.cs" />
+    <Compile Include="TkoolJsonData\Bgm3.cs" />
+    <Compile Include="TkoolJsonData\Bgs.cs" />
+    <Compile Include="TkoolJsonData\Boat.cs" />
+    <Compile Include="TkoolJsonData\Classes.cs" />
+    <Compile Include="TkoolJsonData\CommonEvents.cs" />
+    <Compile Include="TkoolJsonData\Conditions.cs" />
+    <Compile Include="TkoolJsonData\Damage.cs" />
+    <Compile Include="TkoolJsonData\DefeatMe.cs" />
+    <Compile Include="TkoolJsonData\DropItem.cs" />
+    <Compile Include="TkoolJsonData\Effect.cs" />
+    <Compile Include="TkoolJsonData\Enemies.cs" />
+    <Compile Include="TkoolJsonData\Event.cs" />
+    <Compile Include="TkoolJsonData\GameoverMe.cs" />
+    <Compile Include="TkoolJsonData\Image.cs" />
+    <Compile Include="TkoolJsonData\Items.cs" />
+    <Compile Include="TkoolJsonData\Learning.cs" />
+    <Compile Include="TkoolJsonData\List.cs" />
+    <Compile Include="TkoolJsonData\List2.cs" />
+    <Compile Include="TkoolJsonData\Map.cs" />
+    <Compile Include="TkoolJsonData\MapInfoItem.cs" />
+    <Compile Include="TkoolJsonData\Member.cs" />
+    <Compile Include="TkoolJsonData\Messages.cs" />
+    <Compile Include="TkoolJsonData\MoveRoute.cs" />
+    <Compile Include="TkoolJsonData\Page.cs" />
+    <Compile Include="TkoolJsonData\Page_Troops.cs" />
+    <Compile Include="TkoolJsonData\PluguinJs.cs" />
+    <Compile Include="TkoolJsonData\Se.cs" />
+    <Compile Include="TkoolJsonData\Ship.cs" />
+    <Compile Include="TkoolJsonData\Skills.cs" />
+    <Compile Include="TkoolJsonData\Sound.cs" />
+    <Compile Include="TkoolJsonData\States.cs" />
+    <Compile Include="TkoolJsonData\Terms.cs" />
+    <Compile Include="TkoolJsonData\TestBattler.cs" />
+    <Compile Include="TkoolJsonData\Tilesets.cs" />
+    <Compile Include="TkoolJsonData\Timing.cs" />
+    <Compile Include="TkoolJsonData\TitleBgm.cs" />
+    <Compile Include="TkoolJsonData\TkoolMapJson.cs" />
+    <Compile Include="TkoolJsonData\TkoolSystem.cs" />
+    <Compile Include="TkoolJsonData\Trait.cs" />
+    <Compile Include="TkoolJsonData\Trait_Int.cs" />
+    <Compile Include="TkoolJsonData\Troops.cs" />
+    <Compile Include="TkoolJsonData\VictoryMe.cs" />
+    <Compile Include="TkoolJsonData\Weapons.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

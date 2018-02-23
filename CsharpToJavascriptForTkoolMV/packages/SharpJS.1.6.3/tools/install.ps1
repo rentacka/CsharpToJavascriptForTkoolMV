@@ -1,1 +1,0 @@
-Write-Host ("SharpJS - ExaPhaser.WebForms installation was successful! :D")

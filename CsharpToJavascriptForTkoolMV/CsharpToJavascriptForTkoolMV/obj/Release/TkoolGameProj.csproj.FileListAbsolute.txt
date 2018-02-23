@@ -1,0 +1,8 @@
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\bin\Release\TkoolOfJavascriptTheCross.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\bin\Release\TkoolOfJavascriptTheCross.pdb
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\TkoolGameProj.csprojResolveAssemblyReference.cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\CsharpToJavascriptForTkoolMV.Properties.Resources.resources
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\TkoolGameProj.csproj.GenerateResource.Cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\TkoolGameProj.csproj.CoreCompileInputs.cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\TkoolOfJavascriptTheCross.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\CsharpToJavascriptForTkoolMV\obj\Release\TkoolOfJavascriptTheCross.pdb

@@ -1,0 +1,7 @@
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\bin\TypescriptToJs.dll.config
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\bin\TypescriptToJs.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\bin\TypescriptToJs.pdb
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\obj\Release\TypescriptToJs.csprojResolveAssemblyReference.cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\obj\Release\TypescriptToJs.csproj.CoreCompileInputs.cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\obj\Release\TypescriptToJs.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\obj\Release\TypescriptToJs.pdb

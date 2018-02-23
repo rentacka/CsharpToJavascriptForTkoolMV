@@ -1,0 +1,1 @@
+﻿TsToCSharp file2.d.ts

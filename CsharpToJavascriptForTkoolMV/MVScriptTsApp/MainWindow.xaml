@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="コード変換" HorizontalAlignment="Left" Margin="227,289,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <GroupBox Header="ツクールMVのゲームプロジェクトの場所" HorizontalAlignment="Left" Height="48" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
-            <TextBox HorizontalAlignment="Left" Name="GamePathTextbox" Height="23" Margin="4,4,-2,-1" TextWrapping="Wrap" Text="E:\Mydocument\RPGMV\Test\Test" VerticalAlignment="Top" Width="483" TextChanged="GamePathTextbox_TextChanged"/>
+        <Button Content="コード変換" HorizontalAlignment="Left" Margin="171,289,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <GroupBox Header="ツクールMVのゲームプロジェクトの場所" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
+            <TextBox HorizontalAlignment="Left" Name="GamePathTextbox" Height="23" Margin="4,10,-2,-7" TextWrapping="Wrap" Text="E:\Mydocument\RPGMV\Test" VerticalAlignment="Top" Width="483" TextChanged="GamePathTextbox_TextChanged"/>
         </GroupBox>
-        <GroupBox Header="TypescriptToJs.csprojの場所" HorizontalAlignment="Left" Height="73" Margin="10,63,0,0" VerticalAlignment="Top" Width="497">
-            <TextBox HorizontalAlignment="Left" x:Name="TsToJsProjPathTextbox2" Height="42" Margin="4,4,-2,0" TextWrapping="Wrap" Text="E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TypescriptToJs" VerticalAlignment="Top" Width="483" TextChanged="GamePathTextbox_TextChanged"/>
-        </GroupBox>
+        <Button x:Name="TkoolRunButton" Content="ツクール起動" HorizontalAlignment="Left" Margin="259,289,0,0" VerticalAlignment="Top" Width="75" Click="TkoolRunButton_Click"/>
+        <Label x:Name="label" Content="コード変換：プロジェクトのplugins.jsにC#からTypescriptに変換したコードを追加" HorizontalAlignment="Left" Margin="12,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="C#で使えるコードの範囲：using Systemか、あるいはコード全部含めてビルドするか" HorizontalAlignment="Left" Margin="22,138,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="＊注意：すべてのC#からTypescripに変換できるわけではない" HorizontalAlignment="Left" Margin="22,169,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

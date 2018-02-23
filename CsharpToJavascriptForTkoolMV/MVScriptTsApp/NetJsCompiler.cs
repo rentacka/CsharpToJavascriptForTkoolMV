@@ -14,7 +14,7 @@ namespace MVScriptTsApp
 {
     class NetJsCompiler : IAssemblyResolver
     {
-        public static Encoding ender = Encoding.GetEncoding("Shift_JIS");
+        public static Encoding ender = Encoding.UTF8;
         //Encoding ender = Encoding.UTF8;
 
         public class Config

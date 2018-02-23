@@ -1,0 +1,2 @@
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\mscorlib.js
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\MVScriptTsApp\bin\Debug\TypescriptToJs\TkoolOfJavascriptTheCross.js

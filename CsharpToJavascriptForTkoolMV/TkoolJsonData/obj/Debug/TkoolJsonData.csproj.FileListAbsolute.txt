@@ -1,0 +1,7 @@
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\bin\Debug\TkoolJsonData.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\bin\Debug\TkoolJsonData.pdb
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\bin\Debug\Newtonsoft.Json.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\bin\Debug\Newtonsoft.Json.xml
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\obj\Debug\TkoolJsonData.csprojResolveAssemblyReference.cache
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\obj\Debug\TkoolJsonData.dll
+E:\Mydocument\Visual Studio 2017\Projects\CsharpToJavascriptForTkoolMV\TkoolJsonData\obj\Debug\TkoolJsonData.pdb
